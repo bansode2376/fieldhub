@@ -1,177 +1,120 @@
 ```javascript
-const CACHE_NAME = "fieldhub-v1";
+const CACHE_NAME = "fieldhub-v3";
 
 const APP_FILES = [
   "./",
   "./index.html",
+  "./style.css",
+  "./app.js",
   "./manifest.json"
 ];
 
 
 /* ================= INSTALL ================= */
 
-self.addEventListener(
-  "install",
-  event => {
+self.addEventListener("install", function (event) {
 
-    event.waitUntil(
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function (cache) {
+        return cache.addAll(APP_FILES);
+      })
+  );
 
-      caches
-        .open(CACHE_NAME)
-        .then(cache => {
+  self.skipWaiting();
 
-          return cache.addAll(
-            APP_FILES
-          );
-
-        })
-
-    );
-
-    self.skipWaiting();
-
-  }
-);
+});
 
 
 /* ================= ACTIVATE ================= */
 
-self.addEventListener(
-  "activate",
-  event => {
+self.addEventListener("activate", function (event) {
 
-    event.waitUntil(
+  event.waitUntil(
 
-      caches
-        .keys()
-        .then(cacheNames => {
+    caches.keys().then(function (cacheNames) {
 
-          return Promise.all(
+      return Promise.all(
 
-            cacheNames
-              .filter(
-                name =>
-                  name !== CACHE_NAME
-              )
-              .map(
-                name =>
-                  caches.delete(name)
-              )
-          );
-
-        })
-
-    );
-
-    self.clients.claim();
-
-  }
-);
-
-
-/* ================= FETCH ================= */
-
-self.addEventListener(
-  "fetch",
-  event => {
-
-    /*
-      Navigation requests:
-      Try network first, then cached app.
-    */
-
-    if (
-      event.request.mode ===
-      "navigate"
-    ) {
-
-      event.respondWith(
-
-        fetch(event.request)
-          .then(response => {
-
-            const copy =
-              response.clone();
-
-            caches
-              .open(CACHE_NAME)
-              .then(cache => {
-
-                cache.put(
-                  event.request,
-                  copy
-                );
-
-              });
-
-            return response;
-
+        cacheNames
+          .filter(function (name) {
+            return name !== CACHE_NAME;
           })
-
-          .catch(() => {
-
-            return caches.match(
-              event.request
-            );
-
+          .map(function (name) {
+            return caches.delete(name);
           })
 
       );
 
-      return;
-    }
+    })
+
+  );
+
+  self.clients.claim();
+
+});
 
 
-    /*
-      Other files:
-      Try cache first, then network.
-    */
+/* ================= FETCH ================= */
 
-    event.respondWith(
+self.addEventListener("fetch", function (event) {
 
-      caches.match(
-        event.request
-      )
-      .then(cachedResponse => {
+  if (event.request.method !== "GET") {
+    return;
+  }
+
+
+  event.respondWith(
+
+    caches.match(event.request)
+
+      .then(function (cachedResponse) {
 
         if (cachedResponse) {
           return cachedResponse;
         }
 
-        return fetch(
-          event.request
-        )
-        .then(response => {
 
-          if (
-            !response ||
-            response.status !== 200
-          ) {
-            return response;
-          }
+        return fetch(event.request)
 
-          const copy =
-            response.clone();
+          .then(function (networkResponse) {
 
-          caches
-            .open(CACHE_NAME)
-            .then(cache => {
+            if (
+              !networkResponse ||
+              networkResponse.status !== 200
+            ) {
+              return networkResponse;
+            }
 
-              cache.put(
-                event.request,
-                copy
-              );
 
-            });
+            const responseCopy =
+              networkResponse.clone();
 
-          return response;
 
-        });
+            caches.open(CACHE_NAME)
+              .then(function (cache) {
+
+                cache.put(
+                  event.request,
+                  responseCopy
+                );
+
+              });
+
+
+            return networkResponse;
+
+          })
+
+          .catch(function () {
+
+            return caches.match("./index.html");
+
+          });
 
       })
 
-    );
+  );
 
-  }
-);
+});
 ```
