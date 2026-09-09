@@ -1,0 +1,1333 @@
+```html
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>FieldHub</title>
+
+  <!-- PWA -->
+  <link
+    rel="manifest"
+    href="manifest.json"
+  >
+
+  <meta
+    name="theme-color"
+    content="#05070b"
+  >
+
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="FieldHub"
+  >
+
+  <!-- CSS -->
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+</head>
+
+
+<body>
+
+  <!-- CONNECTION STATUS -->
+
+  <div
+    id="connectionStatus"
+    class="connection-status"
+  >
+    <span></span>
+    ONLINE
+  </div>
+
+
+  <!-- INSTALL BUTTON -->
+
+  <button
+    id="installAppBtn"
+    class="install-app-btn"
+    type="button"
+    style="display:none;"
+  >
+    ⬇ INSTALL FIELDHUB
+  </button>
+
+
+  <!-- ================= APP ================= -->
+
+  <div id="app">
+
+
+    <!-- ================= TOP BAR ================= -->
+
+    <header class="topbar">
+
+      <div class="brand-area">
+
+        <div class="brand">
+          FIELD<span>HUB</span>
+        </div>
+
+        <div class="subtitle">
+          FIELD WORK COMMAND CENTER
+        </div>
+
+      </div>
+
+
+      <button
+        class="icon-btn"
+        onclick="showPage('settings')"
+        aria-label="Settings"
+      >
+        ⚙
+      </button>
+
+    </header>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <main
+      id="dashboard"
+      class="page active"
+    >
+
+      <section
+        class="hero-card glass"
+      >
+
+        <div class="hero-content">
+
+          <p class="small-label">
+            FIELD STATUS
+          </p>
+
+          <h1 id="todayDate">
+            Loading...
+          </h1>
+
+          <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            <span>
+              SYSTEM READY
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="dashboard-orb">
+          <span>⚡</span>
+        </div>
+
+      </section>
+
+
+      <!-- TODAY OVERVIEW -->
+
+      <section
+        class="overview-panel glass"
+      >
+
+        <div class="section-heading-row">
+
+          <div>
+
+            <div class="section-title">
+              TODAY'S OVERVIEW
+            </div>
+
+            <div class="section-caption">
+              Your field activity at a glance
+            </div>
+
+          </div>
+
+
+          <div class="live-indicator">
+            <span></span>
+            LIVE
+          </div>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <span class="stat-icon">
+                🏢
+              </span>
+
+              <span class="stat-arrow">
+                ↗
+              </span>
+
+            </div>
+
+            <div
+              class="stat-number"
+              id="visitCount"
+            >
+              0
+            </div>
+
+            <div class="stat-label">
+              VISITS TODAY
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <span class="stat-icon money-icon">
+                ₹
+              </span>
+
+              <span class="stat-arrow">
+                ↗
+              </span>
+
+            </div>
+
+            <div
+              class="stat-number"
+              id="expenseToday"
+            >
+              ₹0
+            </div>
+
+            <div class="stat-label">
+              EXPENSE TODAY
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <span class="stat-icon">
+                📞
+              </span>
+
+              <span class="stat-arrow">
+                ↗
+              </span>
+
+            </div>
+
+            <div
+              class="stat-number"
+              id="followupCount"
+            >
+              0
+            </div>
+
+            <div class="stat-label">
+              FOLLOW-UPS
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <span class="stat-icon">
+                🎯
+              </span>
+
+              <span class="stat-arrow">
+                ↗
+              </span>
+
+            </div>
+
+            <div
+              class="stat-number"
+              id="requirementCount"
+            >
+              0
+            </div>
+
+            <div class="stat-label">
+              REQUIREMENTS
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- QUICK ACTIONS -->
+
+      <section class="section">
+
+        <div class="section-heading-row">
+
+          <div>
+
+            <div class="section-title">
+              QUICK ACTIONS
+            </div>
+
+            <div class="section-caption">
+              Common tasks
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="action-grid">
+
+
+          <button
+            class="action-card glass primary-action"
+            onclick="showPage('work')"
+          >
+
+            <span class="action-icon">
+              🏢
+            </span>
+
+            <span class="action-main">
+              ADD VISIT
+            </span>
+
+            <small>
+              Record client meeting
+            </small>
+
+          </button>
+
+
+          <button
+            class="action-card glass"
+            onclick="showPage('expense')"
+          >
+
+            <span class="action-icon">
+              ₹
+            </span>
+
+            <span class="action-main">
+              ADD EXPENSE
+            </span>
+
+            <small>
+              Record travel cost
+            </small>
+
+          </button>
+
+
+          <button
+            class="action-card glass"
+            onclick="showPage('reports')"
+          >
+
+            <span class="action-icon">
+              ▥
+            </span>
+
+            <span class="action-main">
+              REPORTS
+            </span>
+
+            <small>
+              View work history
+            </small>
+
+          </button>
+
+
+          <button
+            class="action-card glass"
+            onclick="generateWhatsApp()"
+          >
+
+            <span class="action-icon">
+              📲
+            </span>
+
+            <span class="action-main">
+              WHATSAPP
+            </span>
+
+            <small>
+              Generate daily report
+            </small>
+
+          </button>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- RECENT ACTIVITY -->
+
+      <section class="section">
+
+
+        <div class="section-heading-row">
+
+          <div>
+
+            <div class="section-title">
+              RECENT ACTIVITY
+            </div>
+
+            <div class="section-caption">
+              Latest recorded actions
+            </div>
+
+          </div>
+
+
+          <button
+            class="text-btn"
+            onclick="showPage('reports')"
+          >
+            VIEW ALL
+          </button>
+
+        </div>
+
+
+        <div
+          id="recentActivity"
+          class="activity-list glass"
+        >
+
+          <div class="empty-state">
+
+            <div class="empty-icon">
+              ◌
+            </div>
+
+            <strong>
+              No activity yet
+            </strong>
+
+            <span>
+              Your latest visits and expenses
+              will appear here.
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- ================= WORK ================= -->
+
+    <main
+      id="work"
+      class="page"
+    >
+
+      <div class="page-header">
+
+        <button
+          class="back-btn"
+          onclick="showPage('dashboard')"
+        >
+          ←
+        </button>
+
+        <div>
+
+          <div class="page-title">
+            WORK VISIT
+          </div>
+
+          <div class="page-subtitle">
+            RECORD CLIENT VISIT
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <form
+        id="workForm"
+        class="form glass"
+      >
+
+
+        <div class="form-intro">
+
+          <span class="form-intro-icon">
+            🏢
+          </span>
+
+          <div>
+
+            <strong>
+              Client Visit Details
+            </strong>
+
+            <small>
+              Capture the important information
+              from your visit.
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-section-title">
+          COMPANY
+        </div>
+
+
+        <label for="company">
+          Company Name *
+        </label>
+
+        <input
+          id="company"
+          required
+          placeholder="e.g. ABC Industries"
+        >
+
+
+        <label for="industry">
+          Industry
+        </label>
+
+        <input
+          id="industry"
+          placeholder="Manufacturing / Pharma / IT"
+        >
+
+
+        <div class="form-section-title">
+          CONTACT PERSON
+        </div>
+
+
+        <label for="person">
+          Person Met
+        </label>
+
+        <input
+          id="person"
+          placeholder="Name of contact person"
+        >
+
+
+        <label for="designation">
+          Designation
+        </label>
+
+        <input
+          id="designation"
+          placeholder="Manager / Purchase / Engineer"
+        >
+
+
+        <div class="two-column">
+
+
+          <div>
+
+            <label for="phone">
+              Phone Number
+            </label>
+
+            <input
+              id="phone"
+              type="tel"
+              inputmode="tel"
+              placeholder="Contact number"
+            >
+
+          </div>
+
+
+          <div>
+
+            <label for="email">
+              Email
+            </label>
+
+            <input
+              id="email"
+              type="email"
+              placeholder="Email address"
+            >
+
+          </div>
+
+
+        </div>
+
+
+        <div class="form-section-title">
+          BUSINESS DISCUSSION
+        </div>
+
+
+        <label for="service">
+          Services Discussed
+        </label>
+
+        <select id="service">
+
+          <option value="">
+            Select service
+          </option>
+
+          <option>
+            Electrical Projects
+          </option>
+
+          <option>
+            UPS / DG
+          </option>
+
+          <option>
+            Electrical Safety Audit
+          </option>
+
+          <option>
+            BMS / CCTV
+          </option>
+
+          <option>
+            Networking
+          </option>
+
+          <option>
+            Lift SITC / AMC
+          </option>
+
+          <option>
+            Facility Management
+          </option>
+
+          <option>
+            Multiple Services
+          </option>
+
+          <option>
+            Other
+          </option>
+
+        </select>
+
+
+        <label for="requirement">
+          Requirement
+        </label>
+
+        <textarea
+          id="requirement"
+          placeholder="What requirement did the client mention?"
+        ></textarea>
+
+
+        <label for="outcome">
+          Visit Outcome
+        </label>
+
+        <select id="outcome">
+
+          <option>
+            Profile shared
+          </option>
+
+          <option>
+            Interested
+          </option>
+
+          <option>
+            Requirement received
+          </option>
+
+          <option>
+            Follow-up required
+          </option>
+
+          <option>
+            No requirement currently
+          </option>
+
+          <option>
+            Person unavailable
+          </option>
+
+          <option>
+            Other
+          </option>
+
+        </select>
+
+
+        <label for="followup">
+          Follow-up Date
+        </label>
+
+        <input
+          id="followup"
+          type="date"
+        >
+
+
+        <label for="notes">
+          Notes
+        </label>
+
+        <textarea
+          id="notes"
+          placeholder="Additional information"
+        ></textarea>
+
+
+        <div class="form-section-title">
+          LOCATION
+        </div>
+
+
+        <button
+          type="button"
+          class="gps-btn"
+          onclick="captureGPS()"
+        >
+          📍 CAPTURE CURRENT LOCATION
+        </button>
+
+
+        <div
+          id="gpsStatus"
+          class="gps-status"
+        >
+          Location not captured
+        </div>
+
+
+        <button
+          type="submit"
+          class="primary-btn"
+        >
+          SAVE VISIT
+        </button>
+
+
+      </form>
+
+    </main>
+
+
+    <!-- ================= EXPENSE ================= -->
+
+    <main
+      id="expense"
+      class="page"
+    >
+
+      <div class="page-header">
+
+        <button
+          class="back-btn"
+          onclick="showPage('dashboard')"
+        >
+          ←
+        </button>
+
+        <div>
+
+          <div class="page-title">
+            TRAVEL EXPENSE
+          </div>
+
+          <div class="page-subtitle">
+            RECORD TRAVEL COST
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <form
+        id="expenseForm"
+        class="form glass"
+      >
+
+        <div class="form-intro">
+
+          <span class="form-intro-icon">
+            ₹
+          </span>
+
+          <div>
+
+            <strong>
+              Travel Expense
+            </strong>
+
+            <small>
+              Record transportation and field
+              expenses.
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <label for="expenseDate">
+          Travel Date *
+        </label>
+
+        <input
+          id="expenseDate"
+          type="date"
+          required
+        >
+
+
+        <div class="two-column">
+
+
+          <div>
+
+            <label for="fromPlace">
+              From
+            </label>
+
+            <input
+              id="fromPlace"
+              placeholder="Starting location"
+            >
+
+          </div>
+
+
+          <div>
+
+            <label for="toPlace">
+              To
+            </label>
+
+            <input
+              id="toPlace"
+              placeholder="Destination"
+            >
+
+          </div>
+
+
+        </div>
+
+
+        <label for="travelMode">
+          Travel Mode
+        </label>
+
+        <select id="travelMode">
+
+          <option>Train</option>
+          <option>Bus</option>
+          <option>Auto Rickshaw</option>
+          <option>Bike</option>
+          <option>Walking</option>
+          <option>Taxi</option>
+          <option>Other</option>
+
+        </select>
+
+
+        <label for="expenseAmount">
+          Amount ₹ *
+        </label>
+
+        <input
+          id="expenseAmount"
+          type="number"
+          min="0"
+          step="0.01"
+          inputmode="decimal"
+          required
+          placeholder="0"
+        >
+
+
+        <label for="expensePurpose">
+          Purpose
+        </label>
+
+        <input
+          id="expensePurpose"
+          placeholder="Client visit / office work"
+        >
+
+
+        <label for="expenseNotes">
+          Notes
+        </label>
+
+        <textarea
+          id="expenseNotes"
+          placeholder="Additional information"
+        ></textarea>
+
+
+        <button
+          type="submit"
+          class="primary-btn"
+        >
+          SAVE EXPENSE
+        </button>
+
+
+      </form>
+
+    </main>
+
+
+    <!-- ================= REPORTS ================= -->
+
+    <main
+      id="reports"
+      class="page"
+    >
+
+      <div class="page-header">
+
+        <button
+          class="back-btn"
+          onclick="showPage('dashboard')"
+        >
+          ←
+        </button>
+
+        <div>
+
+          <div class="page-title">
+            REPORT CENTER
+          </div>
+
+          <div class="page-subtitle">
+            YOUR FIELD DATA
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <section class="report-cards">
+
+
+        <div class="report-card glass">
+
+          <span>
+            ALL VISITS
+          </span>
+
+          <strong id="totalVisits">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="report-card glass">
+
+          <span>
+            ALL EXPENSES
+          </span>
+
+          <strong id="totalExpenses">
+            ₹0
+          </strong>
+
+        </div>
+
+
+        <div class="report-card glass">
+
+          <span>
+            REQUIREMENTS
+          </span>
+
+          <strong id="totalRequirements">
+            0
+          </strong>
+
+        </div>
+
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-heading-row">
+
+          <div>
+
+            <div class="section-title">
+              VISIT HISTORY
+            </div>
+
+            <div class="section-caption">
+              All recorded company visits
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="visitHistory"
+          class="history-list"
+        ></div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-heading-row">
+
+          <div>
+
+            <div class="section-title">
+              EXPENSE HISTORY
+            </div>
+
+            <div class="section-caption">
+              All recorded travel costs
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="expenseHistory"
+          class="history-list"
+        ></div>
+
+      </section>
+
+
+      <button
+        class="primary-btn"
+        onclick="generateWhatsApp()"
+      >
+        📲 GENERATE TODAY'S WHATSAPP REPORT
+      </button>
+
+    </main>
+
+
+    <!-- ================= SETTINGS ================= -->
+
+    <main
+      id="settings"
+      class="page"
+    >
+
+      <div class="page-header">
+
+        <button
+          class="back-btn"
+          onclick="showPage('dashboard')"
+        >
+          ←
+        </button>
+
+        <div>
+
+          <div class="page-title">
+            SETTINGS
+          </div>
+
+          <div class="page-subtitle">
+            SYSTEM CONTROL
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <section class="settings-list">
+
+
+        <button
+          class="setting-item glass"
+          onclick="exportData()"
+        >
+
+          <span>
+            💾
+          </span>
+
+          <div>
+
+            <strong>
+              BACKUP DATA
+            </strong>
+
+            <small>
+              Download all records
+            </small>
+
+          </div>
+
+          <b>›</b>
+
+        </button>
+
+
+        <button
+          class="setting-item glass"
+          onclick="
+            document
+              .getElementById('importFile')
+              .click()
+          "
+        >
+
+          <span>
+            📥
+          </span>
+
+          <div>
+
+            <strong>
+              RESTORE DATA
+            </strong>
+
+            <small>
+              Import previous backup
+            </small>
+
+          </div>
+
+          <b>›</b>
+
+        </button>
+
+
+        <input
+          id="importFile"
+          type="file"
+          accept=".json"
+          style="display:none"
+          onchange="importData(event)"
+        >
+
+
+        <button
+          class="setting-item glass danger"
+          onclick="clearAllData()"
+        >
+
+          <span>
+            ⚠️
+          </span>
+
+          <div>
+
+            <strong>
+              DELETE ALL DATA
+            </strong>
+
+            <small>
+              This cannot be undone
+            </small>
+
+          </div>
+
+          <b>›</b>
+
+        </button>
+
+
+      </section>
+
+
+      <div class="app-info glass">
+
+        <div class="brand">
+          FIELD<span>HUB</span>
+        </div>
+
+        <small>
+          FIELD WORK COMMAND CENTER
+        </small>
+
+        <span>
+          Version 1.0
+        </span>
+
+      </div>
+
+
+    </main>
+
+
+    <!-- ================= BOTTOM NAV ================= -->
+
+    <nav class="bottom-nav glass">
+
+
+      <button
+        onclick="showPage('dashboard')"
+        class="nav-item active"
+        data-page="dashboard"
+      >
+
+        <span>⌂</span>
+
+        <small>
+          HOME
+        </small>
+
+      </button>
+
+
+      <button
+        onclick="showPage('work')"
+        class="nav-item"
+        data-page="work"
+      >
+
+        <span>🏢</span>
+
+        <small>
+          WORK
+        </small>
+
+      </button>
+
+
+      <button
+        onclick="showPage('expense')"
+        class="nav-item"
+        data-page="expense"
+      >
+
+        <span>₹</span>
+
+        <small>
+          EXPENSE
+        </small>
+
+      </button>
+
+
+      <button
+        onclick="showPage('reports')"
+        class="nav-item"
+        data-page="reports"
+      >
+
+        <span>▥</span>
+
+        <small>
+          REPORTS
+        </small>
+
+      </button>
+
+
+      <button
+        onclick="showPage('settings')"
+        class="nav-item"
+        data-page="settings"
+      >
+
+        <span>⚙</span>
+
+        <small>
+          MORE
+        </small>
+
+      </button>
+
+
+    </nav>
+
+
+    <!-- TOAST -->
+
+    <div
+      id="toast"
+      class="toast"
+    ></div>
+
+
+  </div>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script src="app.js"></script>
+
+</body>
+
+</html>
+```
