@@ -1,4 +1,4 @@
-```javascript
+
 const CACHE_NAME = "fieldhub-v3";
 
 const APP_FILES = [
@@ -117,4 +117,4 @@ self.addEventListener("fetch", function (event) {
   );
 
 });
-```
+
