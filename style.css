@@ -3,32 +3,35 @@
   color-scheme: dark;
 
   --bg: #05070b;
-  --panel: rgba(14, 19, 29, 0.82);
-  --text: #f1f6ff;
-  --muted: #8895a7;
-  --muted-2: #606d80;
+  --panel: rgba(14, 19, 29, 0.88);
+  --text: #f4f7ff;
+  --text-bright: #ffffff;
+  --muted: #a3afbf;
+  --muted-2: #758297;
   --cyan: #53e8ff;
   --purple: #a478ff;
   --danger: #ff6577;
-  --border: rgba(255, 255, 255, 0.08);
-  --radius: 20px;
+  --border: rgba(255, 255, 255, 0.10);
   --bottom-nav-height: 82px;
 }
 
-/* ================= GLOBAL ================= */
+
+/* ================= GLOBAL RESET ================= */
 
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
+html,
+body {
+  margin: 0;
   min-height: 100%;
   background: #05070b !important;
+  color: #f4f7ff !important;
 }
 
 body {
-  margin: 0;
   min-height: 100vh;
 
   background:
@@ -48,8 +51,6 @@ body {
       #080b11 100%
     ) !important;
 
-  color: var(--text) !important;
-
   font-family:
     Inter,
     system-ui,
@@ -61,6 +62,28 @@ body {
   overflow-x: hidden;
 }
 
+
+/* Force text to remain visible */
+
+body,
+#app,
+#app div,
+#app section,
+#app main,
+#app header,
+#app nav,
+#app p,
+#app h1,
+#app h2,
+#app h3,
+#app span,
+#app strong,
+#app small,
+#app label {
+  color: #f4f7ff;
+}
+
+
 button,
 input,
 select,
@@ -68,29 +91,20 @@ textarea {
   font: inherit;
 }
 
-button {
-  color: inherit;
-}
+
+/* ================= APP ================= */
 
 #app {
   min-height: 100vh;
-  padding-bottom: calc(var(--bottom-nav-height) + 30px);
+
+  padding-bottom:
+    calc(
+      var(--bottom-nav-height) + 30px
+    );
+
+  background: transparent !important;
 }
 
-/* ================= SCROLLBAR ================= */
-
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 99px;
-}
 
 /* ================= GLASS ================= */
 
@@ -98,25 +112,47 @@ button {
   background:
     linear-gradient(
       145deg,
-      rgba(255, 255, 255, 0.045),
-      rgba(255, 255, 255, 0.012)
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.015)
     ),
-    var(--panel);
+    var(--panel) !important;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter:
+    blur(22px);
+
+  -webkit-backdrop-filter:
+    blur(22px);
 
   box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.35);
+    0 18px 50px rgba(0, 0, 0, 0.40);
 }
+
+
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05070b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #293241;
+  border-radius: 99px;
+}
+
 
 /* ================= TOP BAR ================= */
 
 .topbar {
   position: sticky;
   top: 0;
+
   z-index: 50;
 
   min-height: 76px;
@@ -128,37 +164,38 @@ button {
   padding: 14px 16px;
 
   background:
-    linear-gradient(
-      180deg,
-      rgba(5, 7, 11, 0.97),
-      rgba(5, 7, 11, 0.78)
-    );
+    rgba(5, 7, 11, 0.97) !important;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.07);
 
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.045);
 }
 
 .brand {
+  color: #ffffff !important;
+
   font-size: 22px;
   font-weight: 900;
+
   letter-spacing: 0.08em;
 }
 
 .brand span {
-  color: var(--cyan);
+  color: var(--cyan) !important;
 }
 
 .subtitle {
   margin-top: 3px;
 
+  color: #9aa7b8 !important;
+
   font-size: 8px;
   font-weight: 800;
-  letter-spacing: 0.22em;
 
-  color: var(--muted);
+  letter-spacing: 0.22em;
 }
 
 .icon-btn {
@@ -174,14 +211,15 @@ button {
   border-radius: 14px;
 
   background:
-    rgba(255, 255, 255, 0.035);
+    rgba(255, 255, 255, 0.045);
+
+  color: #ffffff !important;
 
   cursor: pointer;
+
+  font-size: 18px;
 }
 
-.icon-btn:active {
-  transform: scale(0.93);
-}
 
 /* ================= PAGES ================= */
 
@@ -193,7 +231,11 @@ button {
   padding:
     18px
     16px
-    calc(var(--bottom-nav-height) + 35px);
+    calc(
+      var(--bottom-nav-height) + 35px
+    );
+
+  background: transparent !important;
 }
 
 .page:not(.active) {
@@ -203,6 +245,7 @@ button {
 .page.active {
   display: block;
 }
+
 
 /* ================= HERO ================= */
 
@@ -222,51 +265,6 @@ button {
   overflow: hidden;
 
   border-radius: 24px;
-
-  border-color:
-    rgba(83, 232, 255, 0.12);
-}
-
-.hero-card::before {
-  content: "";
-
-  position: absolute;
-
-  width: 240px;
-  height: 240px;
-
-  left: -90px;
-  top: -100px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(83, 232, 255, 0.13),
-      transparent 68%
-    );
-}
-
-.hero-card::after {
-  content: "";
-
-  position: absolute;
-
-  width: 260px;
-  height: 260px;
-
-  right: -90px;
-  bottom: -130px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(164, 120, 255, 0.12),
-      transparent 68%
-    );
 }
 
 .hero-content {
@@ -277,18 +275,20 @@ button {
 .small-label {
   margin: 0 0 8px;
 
+  color: var(--cyan) !important;
+
   font-size: 9px;
   font-weight: 900;
 
   letter-spacing: 0.25em;
-
-  color: var(--cyan);
 }
 
 .hero-card h1 {
   margin: 0;
 
   max-width: 280px;
+
+  color: #ffffff !important;
 
   font-size:
     clamp(25px, 7vw, 38px);
@@ -301,25 +301,28 @@ button {
 .system-status {
   display: flex;
   align-items: center;
+
   gap: 8px;
 
   margin-top: 16px;
+
+  color: #c4cfdd !important;
 
   font-size: 9px;
   font-weight: 900;
 
   letter-spacing: 0.16em;
-
-  color: #a8b7c8;
 }
 
 .status-dot {
   width: 8px;
   height: 8px;
 
+  flex-shrink: 0;
+
   border-radius: 50%;
 
-  background: #56e7a4;
+  background: #56e7a4 !important;
 
   box-shadow:
     0 0 15px
@@ -329,7 +332,8 @@ button {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -342,6 +346,7 @@ button {
 
 .dashboard-orb {
   position: relative;
+
   z-index: 2;
 
   width: 84px;
@@ -354,11 +359,6 @@ button {
 
   background:
     radial-gradient(
-      circle at 35% 30%,
-      rgba(255, 255, 255, 0.18),
-      transparent 22%
-    ),
-    radial-gradient(
       circle,
       rgba(83, 232, 255, 0.16),
       rgba(83, 232, 255, 0.02) 65%,
@@ -366,14 +366,17 @@ button {
     );
 
   border:
-    1px solid rgba(83, 232, 255, 0.27);
+    1px solid
+    rgba(83, 232, 255, 0.27);
 
   box-shadow:
-    0 0 0 8px rgba(83, 232, 255, 0.025),
-    0 0 45px rgba(83, 232, 255, 0.12);
+    0 0 45px
+    rgba(83, 232, 255, 0.12);
 }
 
 .dashboard-orb span {
+  color: var(--cyan) !important;
+
   font-size: 30px;
 
   filter:
@@ -382,6 +385,7 @@ button {
       rgba(83, 232, 255, 0.8)
     );
 }
+
 
 /* ================= SECTIONS ================= */
 
@@ -400,6 +404,8 @@ button {
 }
 
 .section-title {
+  color: #ffffff !important;
+
   font-size: 11px;
   font-weight: 900;
 
@@ -409,9 +415,9 @@ button {
 .section-caption {
   margin-top: 4px;
 
-  font-size: 9px;
+  color: #8d9aab !important;
 
-  color: var(--muted-2);
+  font-size: 9px;
 }
 
 .text-btn {
@@ -419,37 +425,39 @@ button {
 
   background: transparent;
 
+  color: var(--cyan) !important;
+
   font-size: 9px;
   font-weight: 900;
 
   letter-spacing: 0.08em;
 
-  color: var(--cyan);
-
   cursor: pointer;
 }
+
 
 /* ================= OVERVIEW ================= */
 
 .overview-panel {
   padding: 16px;
 
-  border-radius: var(--radius);
+  border-radius: 20px;
 }
 
 .live-indicator {
   display: flex;
   align-items: center;
+
   gap: 6px;
 
   padding: 6px 9px;
+
+  color: #aeb9c8 !important;
 
   font-size: 8px;
   font-weight: 900;
 
   letter-spacing: 0.1em;
-
-  color: #9eb0c6;
 
   border:
     1px solid var(--border);
@@ -463,12 +471,13 @@ button {
 
   border-radius: 50%;
 
-  background: #5cf0b0;
+  background: #5cf0b0 !important;
 
   box-shadow:
     0 0 10px
     rgba(92, 240, 176, 0.8);
 }
+
 
 /* ================= STATS ================= */
 
@@ -484,8 +493,6 @@ button {
 }
 
 .stat-card {
-  position: relative;
-
   min-height: 126px;
 
   padding: 14px;
@@ -493,17 +500,13 @@ button {
   border-radius: 16px;
 
   background:
-    linear-gradient(
-      145deg,
-      rgba(255, 255, 255, 0.04),
-      rgba(255, 255, 255, 0.015)
-    );
+    rgba(18, 25, 38, 0.80) !important;
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.055);
+    rgba(255, 255, 255, 0.07);
 
-  overflow: hidden;
+  color: #ffffff !important;
 }
 
 .stat-top {
@@ -524,21 +527,23 @@ button {
   background:
     rgba(83, 232, 255, 0.12);
 
+  color: #c9f9ff !important;
+
   font-size: 15px;
 }
 
 .money-icon {
-  font-size: 18px;
   font-weight: 900;
 }
 
 .stat-arrow {
-  color: var(--muted-2);
-  font-size: 12px;
+  color: #718095 !important;
 }
 
 .stat-number {
   margin-top: 16px;
+
+  color: #ffffff !important;
 
   font-size: 25px;
   font-weight: 900;
@@ -549,13 +554,14 @@ button {
 .stat-label {
   margin-top: 4px;
 
+  color: #9aa7b8 !important;
+
   font-size: 8px;
   font-weight: 900;
 
   letter-spacing: 0.12em;
-
-  color: var(--muted);
 }
+
 
 /* ================= QUICK ACTIONS ================= */
 
@@ -575,6 +581,7 @@ button {
 
   display: flex;
   flex-direction: column;
+
   align-items: flex-start;
   justify-content: center;
 
@@ -582,25 +589,13 @@ button {
 
   border-radius: 17px;
 
+  color: #ffffff !important;
+
   cursor: pointer;
 
-  transition:
-    transform 0.18s ease,
-    border-color 0.18s ease;
-}
-
-.action-card:active {
-  transform: scale(0.97);
-}
-
-.action-card:hover {
-  border-color:
-    rgba(83, 232, 255, 0.28);
-}
-
-.primary-action {
-  border-color:
-    rgba(83, 232, 255, 0.18);
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
 }
 
 .action-icon {
@@ -617,10 +612,14 @@ button {
   background:
     rgba(83, 232, 255, 0.12);
 
+  color: #d5fbff !important;
+
   font-size: 18px;
 }
 
 .action-main {
+  color: #ffffff !important;
+
   font-size: 10px;
   font-weight: 900;
 
@@ -630,12 +629,19 @@ button {
 .action-card small {
   margin-top: 4px;
 
-  font-size: 8px;
+  color: #929fb0 !important;
 
-  color: var(--muted);
+  font-size: 8px;
 }
 
+
 /* ================= HISTORY ================= */
+
+.activity-list {
+  overflow: hidden;
+
+  border-radius: 20px;
+}
 
 .history-item {
   position: relative;
@@ -645,21 +651,24 @@ button {
   margin-bottom: 8px;
 
   border-radius: 15px;
-}
 
-.activity-list {
-  overflow: hidden;
-
-  border-radius: var(--radius);
+  color: #ffffff !important;
 }
 
 .activity-list .history-item {
   margin-bottom: 0;
+
   border-radius: 0;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.055);
 }
 
 .history-item strong {
   display: block;
+
+  color: #ffffff !important;
 
   font-size: 12px;
 }
@@ -669,7 +678,7 @@ button {
 
   margin-top: 5px;
 
-  color: var(--muted);
+  color: #9aa7b8 !important;
 
   font-size: 9px;
 
@@ -686,17 +695,17 @@ button {
 
   border-radius: 99px;
 
-  font-size: 8px;
-  font-weight: 800;
-
-  color: #b5effa;
+  color: #bdf5ff !important;
 
   background:
-    rgba(83, 232, 255, 0.07);
+    rgba(83, 232, 255, 0.08);
 
   border:
     1px solid
-    rgba(83, 232, 255, 0.08);
+    rgba(83, 232, 255, 0.10);
+
+  font-size: 8px;
+  font-weight: 800;
 }
 
 .empty-state {
@@ -712,13 +721,13 @@ button {
 
   text-align: center;
 
-  color: var(--muted);
+  color: #8f9daf !important;
 }
 
 .empty-state strong {
   margin-top: 6px;
 
-  color: var(--text);
+  color: #ffffff !important;
 
   font-size: 11px;
 }
@@ -728,20 +737,21 @@ button {
 
   max-width: 240px;
 
+  color: #7e8b9e !important;
+
   font-size: 9px;
 
   line-height: 1.5;
-
-  color: var(--muted-2);
 }
 
 .empty-icon {
-  font-size: 25px;
+  color: var(--cyan) !important;
 
-  color: var(--cyan);
+  font-size: 25px;
 
   opacity: 0.75;
 }
+
 
 /* ================= PAGE HEADER ================= */
 
@@ -764,7 +774,9 @@ button {
     1px solid var(--border);
 
   background:
-    rgba(255, 255, 255, 0.035);
+    rgba(255, 255, 255, 0.045);
+
+  color: #ffffff !important;
 
   cursor: pointer;
 
@@ -772,6 +784,8 @@ button {
 }
 
 .page-title {
+  color: #ffffff !important;
+
   font-size: 16px;
   font-weight: 900;
 
@@ -781,15 +795,16 @@ button {
 .page-subtitle {
   margin-top: 4px;
 
+  color: #929fb0 !important;
+
   font-size: 8px;
   font-weight: 800;
 
   letter-spacing: 0.15em;
-
-  color: var(--muted);
 }
 
-/* ================= FORMS ================= */
+
+/* ================= FORM ================= */
 
 .form {
   padding: 17px;
@@ -810,11 +825,11 @@ button {
   border-radius: 15px;
 
   background:
-    rgba(83, 232, 255, 0.045);
+    rgba(83, 232, 255, 0.05);
 
   border:
     1px solid
-    rgba(83, 232, 255, 0.08);
+    rgba(83, 232, 255, 0.10);
 }
 
 .form-intro-icon {
@@ -824,18 +839,20 @@ button {
   display: grid;
   place-items: center;
 
-  flex: 0 0 auto;
-
   border-radius: 12px;
 
   background:
     rgba(83, 232, 255, 0.12);
+
+  color: #d9fbff !important;
 
   font-weight: 900;
 }
 
 .form-intro strong {
   display: block;
+
+  color: #ffffff !important;
 
   font-size: 11px;
 }
@@ -845,20 +862,20 @@ button {
 
   margin-top: 4px;
 
-  font-size: 8px;
+  color: #919eae !important;
 
-  color: var(--muted);
+  font-size: 8px;
 }
 
 .form-section-title {
   margin: 19px 0 10px;
 
+  color: var(--cyan) !important;
+
   font-size: 8px;
   font-weight: 900;
 
   letter-spacing: 0.2em;
-
-  color: var(--cyan);
 }
 
 label {
@@ -866,11 +883,14 @@ label {
 
   margin: 12px 0 7px;
 
+  color: #d0d9e5 !important;
+
   font-size: 9px;
   font-weight: 800;
-
-  color: #b6c1cf;
 }
+
+
+/* ================= INPUTS ================= */
 
 input,
 select,
@@ -879,18 +899,20 @@ textarea {
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.08);
+    rgba(255, 255, 255, 0.10) !important;
 
   border-radius: 12px;
 
   background:
-    rgba(4, 7, 12, 0.78);
+    #090e16 !important;
 
-  color: var(--text);
+  color: #ffffff !important;
 
   padding: 12px 13px;
 
   outline: none;
+
+  -webkit-text-fill-color: #ffffff !important;
 
   transition:
     border-color 0.18s ease,
@@ -910,17 +932,29 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: #586579;
+  color: #657286 !important;
+
+  opacity: 1;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
   border-color:
-    rgba(83, 232, 255, 0.36);
+    rgba(83, 232, 255, 0.45) !important;
 
   box-shadow:
-    0 0 0 3px rgba(83, 232, 255, 0.05);
+    0 0 0 3px
+    rgba(83, 232, 255, 0.06);
+}
+
+
+/* Dropdown options */
+
+select option {
+  background: #0b111b !important;
+
+  color: #ffffff !important;
 }
 
 .two-column {
@@ -931,6 +965,9 @@ textarea:focus {
 
   gap: 10px;
 }
+
+
+/* ================= GPS ================= */
 
 .gps-btn {
   width: 100%;
@@ -943,12 +980,12 @@ textarea:focus {
 
   border:
     1px solid
-    rgba(83, 232, 255, 0.18);
+    rgba(83, 232, 255, 0.22);
 
   background:
-    rgba(83, 232, 255, 0.07);
+    rgba(83, 232, 255, 0.08);
 
-  color: #a9f3ff;
+  color: #c7f8ff !important;
 
   font-weight: 900;
 
@@ -967,12 +1004,15 @@ textarea:focus {
   border-radius: 10px;
 
   background:
-    rgba(255, 255, 255, 0.025);
+    rgba(255, 255, 255, 0.035);
 
-  color: var(--muted);
+  color: #99a6b7 !important;
 
   font-size: 8px;
 }
+
+
+/* ================= PRIMARY BUTTON ================= */
 
 .primary-btn {
   width: 100%;
@@ -983,18 +1023,18 @@ textarea:focus {
 
   border:
     1px solid
-    rgba(83, 232, 255, 0.3);
+    rgba(83, 232, 255, 0.32);
 
   border-radius: 14px;
 
   background:
     linear-gradient(
       135deg,
-      rgba(83, 232, 255, 0.19),
-      rgba(164, 120, 255, 0.13)
+      rgba(83, 232, 255, 0.20),
+      rgba(164, 120, 255, 0.15)
     );
 
-  color: #eafcff;
+  color: #ffffff !important;
 
   font-size: 10px;
   font-weight: 900;
@@ -1004,9 +1044,6 @@ textarea:focus {
   cursor: pointer;
 }
 
-.primary-btn:active {
-  transform: scale(0.98);
-}
 
 /* ================= REPORTS ================= */
 
@@ -1030,20 +1067,25 @@ textarea:focus {
   flex-direction: column;
 
   justify-content: space-between;
+
+  color: #ffffff !important;
 }
 
 .report-card span {
+  color: #a3afbf !important;
+
   font-size: 8px;
   font-weight: 900;
-
-  color: var(--muted);
 
   letter-spacing: 0.08em;
 }
 
 .report-card strong {
+  color: #ffffff !important;
+
   font-size: 23px;
 }
+
 
 /* ================= SETTINGS ================= */
 
@@ -1071,6 +1113,11 @@ textarea:focus {
   border:
     1px solid var(--border);
 
+  background:
+    rgba(14, 19, 29, 0.88) !important;
+
+  color: #ffffff !important;
+
   text-align: left;
 
   cursor: pointer;
@@ -1083,12 +1130,12 @@ textarea:focus {
   display: grid;
   place-items: center;
 
-  flex: 0 0 auto;
-
   border-radius: 12px;
 
   background:
-    rgba(255, 255, 255, 0.04);
+    rgba(255, 255, 255, 0.05);
+
+  color: #ffffff !important;
 }
 
 .setting-item > div {
@@ -1097,6 +1144,8 @@ textarea:focus {
 
 .setting-item strong {
   display: block;
+
+  color: #ffffff !important;
 
   font-size: 10px;
 
@@ -1108,20 +1157,20 @@ textarea:focus {
 
   margin-top: 4px;
 
-  color: var(--muted);
+  color: #929fb0 !important;
 
   font-size: 8px;
 }
 
 .setting-item b {
-  color: var(--muted-2);
+  color: #758297 !important;
 
   font-size: 19px;
 }
 
 .setting-item.danger {
   border-color:
-    rgba(255, 101, 119, 0.14);
+    rgba(255, 101, 119, 0.18);
 }
 
 .app-info {
@@ -1135,6 +1184,8 @@ textarea:focus {
 }
 
 .app-info .brand {
+  color: #ffffff !important;
+
   font-size: 19px;
 }
 
@@ -1143,7 +1194,7 @@ textarea:focus {
 
   margin-top: 5px;
 
-  color: var(--muted);
+  color: #8d9aab !important;
 
   font-size: 7px;
 
@@ -1155,10 +1206,11 @@ textarea:focus {
 
   margin-top: 13px;
 
-  color: var(--muted-2);
+  color: #6f7c90 !important;
 
   font-size: 8px;
 }
+
 
 /* ================= BOTTOM NAV ================= */
 
@@ -1170,12 +1222,17 @@ textarea:focus {
 
   z-index: 100;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   width:
-    min(calc(100% - 20px), 610px);
+    min(
+      calc(100% - 20px),
+      610px
+    );
 
-  height: var(--bottom-nav-height);
+  height:
+    var(--bottom-nav-height);
 
   display: grid;
 
@@ -1186,14 +1243,18 @@ textarea:focus {
 
   padding: 7px;
 
+  background:
+    rgba(10, 15, 23, 0.95) !important;
+
   border-radius: 21px;
 
-  border-color:
-    rgba(255, 255, 255, 0.09);
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.10);
 
   box-shadow:
-    0 20px 45px rgba(0, 0, 0, 0.55),
-    0 0 35px rgba(83, 232, 255, 0.04);
+    0 20px 45px
+    rgba(0, 0, 0, 0.55);
 }
 
 .nav-item {
@@ -1213,16 +1274,20 @@ textarea:focus {
 
   background: transparent;
 
-  color: var(--muted-2);
+  color: #7d8a9e !important;
 
   cursor: pointer;
 }
 
 .nav-item span {
+  color: inherit !important;
+
   font-size: 18px;
 }
 
 .nav-item small {
+  color: inherit !important;
+
   font-size: 7px;
   font-weight: 900;
 
@@ -1230,7 +1295,7 @@ textarea:focus {
 }
 
 .nav-item.active {
-  color: var(--cyan);
+  color: var(--cyan) !important;
 
   background:
     linear-gradient(
@@ -1240,11 +1305,8 @@ textarea:focus {
     );
 }
 
-.nav-item:active {
-  transform: scale(0.92);
-}
 
-/* ================= PWA STATUS ================= */
+/* ================= CONNECTION ================= */
 
 .connection-status {
   position: fixed;
@@ -1264,13 +1326,13 @@ textarea:focus {
   border-radius: 99px;
 
   background:
-    rgba(10, 15, 22, 0.88);
+    rgba(10, 15, 22, 0.95);
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.07);
+    rgba(255, 255, 255, 0.08);
 
-  color: #8290a3;
+  color: #b0bdcc !important;
 
   font-size: 7px;
   font-weight: 900;
@@ -1292,21 +1354,15 @@ textarea:focus {
 }
 
 .connection-status.offline {
-  border-color:
-    rgba(255, 101, 119, 0.2);
-
-  color: #ff9aa7;
+  color: #ff9aa7 !important;
 }
 
 .connection-status.offline span {
   background: var(--danger);
-
-  box-shadow:
-    0 0 9px
-    rgba(255, 101, 119, 0.7);
 }
 
-/* ================= INSTALL BUTTON ================= */
+
+/* ================= INSTALL ================= */
 
 .install-app-btn {
   position: fixed;
@@ -1316,10 +1372,14 @@ textarea:focus {
 
   z-index: 120;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   width:
-    min(calc(100% - 40px), 330px);
+    min(
+      calc(100% - 40px),
+      330px
+    );
 
   min-height: 46px;
 
@@ -1327,16 +1387,16 @@ textarea:focus {
 
   border:
     1px solid
-    rgba(83, 232, 255, 0.28);
+    rgba(83, 232, 255, 0.30);
 
   background:
     linear-gradient(
       135deg,
-      rgba(83, 232, 255, 0.16),
-      rgba(164, 120, 255, 0.14)
+      rgba(83, 232, 255, 0.18),
+      rgba(164, 120, 255, 0.15)
     );
 
-  color: #e8fbff;
+  color: #ffffff !important;
 
   font-size: 9px;
   font-weight: 900;
@@ -1345,6 +1405,7 @@ textarea:focus {
 
   cursor: pointer;
 }
+
 
 /* ================= TOAST ================= */
 
@@ -1360,6 +1421,7 @@ textarea:focus {
     translate(-50%, 20px);
 
   width: max-content;
+
   max-width:
     calc(100% - 30px);
 
@@ -1368,18 +1430,19 @@ textarea:focus {
   border-radius: 12px;
 
   background:
-    rgba(16, 22, 32, 0.96);
+    rgba(16, 22, 32, 0.98);
 
   border:
     1px solid
     rgba(83, 232, 255, 0.18);
 
-  color: #d9faff;
+  color: #e6fbff !important;
 
   font-size: 9px;
   font-weight: 800;
 
   opacity: 0;
+
   pointer-events: none;
 
   transition:
@@ -1394,6 +1457,7 @@ textarea:focus {
     translate(-50%, 0);
 }
 
+
 /* ================= MOBILE ================= */
 
 @media (max-width: 390px) {
@@ -1406,7 +1470,8 @@ textarea:focus {
   .hero-card {
     min-height: 170px;
 
-    padding: 20px 18px;
+    padding:
+      20px 18px;
   }
 
   .dashboard-orb {
@@ -1420,6 +1485,7 @@ textarea:focus {
 
   .stat-card {
     min-height: 116px;
+
     padding: 12px;
   }
 
@@ -1429,11 +1495,13 @@ textarea:focus {
 
   .action-card {
     min-height: 110px;
+
     padding: 13px;
   }
 
   .two-column {
     grid-template-columns: 1fr;
+
     gap: 0;
   }
 
@@ -1443,6 +1511,7 @@ textarea:focus {
 
   .report-card {
     min-height: 95px;
+
     padding: 11px;
   }
 
@@ -1451,10 +1520,13 @@ textarea:focus {
   }
 
   .bottom-nav {
-    width: calc(100% - 14px);
+    width:
+      calc(100% - 14px);
+
     bottom: 7px;
   }
 }
+
 
 @media (max-width: 340px) {
 
@@ -1464,6 +1536,11 @@ textarea:focus {
 
   .subtitle {
     font-size: 7px;
+  }
+
+  .page {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .hero-card h1 {
@@ -1480,9 +1557,12 @@ textarea:focus {
   }
 }
 
+
 /* ================= SAFE AREA ================= */
 
-@supports (padding: env(safe-area-inset-bottom)) {
+@supports (
+  padding: env(safe-area-inset-bottom)
+) {
 
   #app {
     padding-bottom:
