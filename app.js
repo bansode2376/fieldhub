@@ -1,4 +1,3 @@
-
 /* =========================================================
    FIELDHUB
    Field Work Command Center
@@ -1667,4 +1666,3 @@ function registerServiceWorker() {
   );
 
 }
-
