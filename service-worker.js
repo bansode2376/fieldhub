@@ -1,41 +1,34 @@
-
-const CACHE_NAME = "fieldhub-v3";
+const CACHE_NAME = "fieldhub-v4";
 
 const APP_FILES = [
   "./",
   "./index.html",
   "./style.css",
   "./app.js",
-  "./manifest.json"
+  "./manifest.json",
+  "./icon-192.png",
+  "./icon-512.png"
 ];
-
 
 /* ================= INSTALL ================= */
 
 self.addEventListener("install", function (event) {
-
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function (cache) {
-        return cache.addAll(APP_FILES);
-      })
+    caches.open(CACHE_NAME).then(function (cache) {
+      return cache.addAll(APP_FILES);
+    })
   );
 
   self.skipWaiting();
-
 });
 
 
 /* ================= ACTIVATE ================= */
 
 self.addEventListener("activate", function (event) {
-
   event.waitUntil(
-
     caches.keys().then(function (cacheNames) {
-
       return Promise.all(
-
         cacheNames
           .filter(function (name) {
             return name !== CACHE_NAME;
@@ -43,15 +36,11 @@ self.addEventListener("activate", function (event) {
           .map(function (name) {
             return caches.delete(name);
           })
-
       );
-
     })
-
   );
 
   self.clients.claim();
-
 });
 
 
@@ -63,58 +52,38 @@ self.addEventListener("fetch", function (event) {
     return;
   }
 
-
   event.respondWith(
+    fetch(event.request)
+      .then(function (networkResponse) {
 
-    caches.match(event.request)
-
-      .then(function (cachedResponse) {
-
-        if (cachedResponse) {
-          return cachedResponse;
+        if (
+          !networkResponse ||
+          networkResponse.status !== 200
+        ) {
+          return networkResponse;
         }
 
+        const responseCopy = networkResponse.clone();
 
-        return fetch(event.request)
+        caches.open(CACHE_NAME).then(function (cache) {
+          cache.put(event.request, responseCopy);
+        });
 
-          .then(function (networkResponse) {
+        return networkResponse;
 
-            if (
-              !networkResponse ||
-              networkResponse.status !== 200
-            ) {
-              return networkResponse;
+      })
+      .catch(function () {
+
+        return caches.match(event.request)
+          .then(function (cachedResponse) {
+
+            if (cachedResponse) {
+              return cachedResponse;
             }
 
-
-            const responseCopy =
-              networkResponse.clone();
-
-
-            caches.open(CACHE_NAME)
-              .then(function (cache) {
-
-                cache.put(
-                  event.request,
-                  responseCopy
-                );
-
-              });
-
-
-            return networkResponse;
-
-          })
-
-          .catch(function () {
-
             return caches.match("./index.html");
-
           });
 
       })
-
   );
-
 });
-
